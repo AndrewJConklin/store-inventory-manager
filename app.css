@@ -1,0 +1,51 @@
+body {
+    background-color: beige;
+    max-width: 70%;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    margin-top: 16px;
+    font-size: 48px;
+}
+
+h2 {
+    margin: 24px;
+    font-size: 36px;
+}
+
+#add-item-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-item-container h2 {
+    align-self: center;
+}
+
+#add-item-container form {
+    align-self: center;
+}
+
+#inventory-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#inventory-container h2 {
+    align-self: center;
+}
+
+#current-inventory {
+    margin: 16px;
+}
+
+#current-inventory th,
+td {
+    border: 2px solid black;
+}

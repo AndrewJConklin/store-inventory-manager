@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script defer src="index.js"></script>
+    <title>Store Inventory Manager</title>
+</head>
+
+<body>
+    <header>
+        <h1>Store Inventory Manager</h1>
+    </header>
+    <main>
+        <div id="add-item-container">
+            <h2>Add Item</h2>
+            <form id="add-item">
+                <label for="item-name">Item</label>
+                <input type="text" name="item-name" id="item-name" required>
+                <label for="item-sell-in">Sell In</label>
+                <input type="number" name="item-sell-in" id="item-sell-in" required>
+                <label for="item-quality">Quality</label>
+                <input type="number" name="item-quality" id="item-quality" required>
+                <label for="date-added">Date Added</label>
+                <input type="date" name="date-added" id="date-added" required>
+                <input type="submit" value="Add Item">
+            </form>
+        </div>
+        <div id="inventory-container">
+            <h2>Current Inventory</h2>
+            <table id="current-inventory">
+                <tr>
+                    <th>Item</th>
+                    <th>Sell In</th>
+                    <th>Quality</th>
+                    <th>Date Added</th>
+                </tr>
+                <tr>
+                    <th>+5 Dexterity Vest</th>
+                    <th>10</th>
+                    <th>20</th>
+                    <th>2022-04-05</th>
+                </tr>
+                <tr>
+                    <th>Aged Brie</th>
+                    <th>2</th>
+                    <th>0</th>
+                    <th>2022-04-21</th>
+                </tr>
+                <tr>
+                    <th>Sulfuras, Hand of Ragnaros</th>
+                    <th>0</th>
+                    <th>80</th>
+                    <th>2022-04-20</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

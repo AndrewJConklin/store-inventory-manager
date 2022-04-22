@@ -11,26 +11,44 @@ form.addEventListener('submit', (event) => {
     }
     form.reset()
 
-    localStorage.setItem('newItem', JSON.stringify(newItem))
+    const currentInventory = document.querySelector('#current-inventory')
+    const newRow = createNewRow(newItem)
+    currentInventory.append(newRow)
 })
 
-const newItem = JSON.parse(localStorage.getItem('newItem'))
-const newItemName = newItem.name
-const dateNewItemAdded = new Date(`${newItem.dateAdded}`)
-
 function calculateElapsedDays(date) {
+    const dateNewItemAdded = new Date(date)
     const dateNewItemAddedInMill = dateNewItemAdded.getTime()
     const currentDateInMill = Date.now()
     const elapsedMill = currentDateInMill - dateNewItemAddedInMill
     return elapsedDays = Math.floor((elapsedMill / (60 * 60 * 24 * 1000)))
 }
 
-const currentInventory = document.querySelector('#current-inventory')
-const newRow = document.createElement('tr')
-newRow.innerHTML = `
+function createNewRow(newItem) {
+    const newRow = document.createElement('tr')
+    const sellIn = calculateSellIn(newItem)
+    newRow.innerHTML = `
         <th>${newItem.name}</th>
-        <th>${+newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))}</th>
+        <th>${sellIn}</th>
         <th>${newItem.startingQuality - (calculateElapsedDays(newItem.dateAdded))}</th>
         <th>${newItem.dateAdded}</th>
     `
-currentInventory.append(newRow)
+    return newRow
+}
+
+function calculateSellIn(newItem) {
+    if (newItem.name.includes('Sulfuras')) {
+        return 0
+    } else {
+        return newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))
+    }
+}
+
+function calculateQuality(newItem) {
+    if (newItem.name.includes('Sulfuras')) {
+        return 80
+    } else {
+
+        return newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))
+    }
+}

@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Tapestry&display=swap');
+
 body {
     background-color: beige;
     max-width: 70%;
     margin: auto;
+    font-family: 'Tapestry',
+        cursive;
 }
 
 header {
@@ -15,7 +19,7 @@ h1 {
 }
 
 h2 {
-    margin: 24px;
+    margin: 48px;
     font-size: 36px;
 }
 
@@ -28,8 +32,29 @@ h2 {
     align-self: center;
 }
 
-#add-item-container form {
-    align-self: center;
+#add-item {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 15px;
+}
+
+label,
+input {
+    width: 100%;
+    border-radius: 15px;
+    padding: 8px;
+    text-align: center;
+    margin: 5px;
+    font-family: inherit;
+}
+
+label {
+    font-size: 20px;
+    background-color: hsl(46, 75%, 66%);
+}
+
+input {
+    box-shadow: 0 0 4px 4px hsla(0, 77%, 41%, 0.7);
 }
 
 #inventory-container {
@@ -43,9 +68,24 @@ h2 {
 
 #current-inventory {
     margin: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-#current-inventory th,
-td {
+#table-header {
+    background-color: #8f1d1d;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#current-inventory th {
     border: 2px solid black;
+    padding: 10px 15px;
+}
+
+#current-inventory tr:nth-of-type(even) {
+    background-color: hsl(46, 75%, 66%);
+}
+
+#current-inventory tr:last-of-type {
+    border-bottom: 3px solid black
 }

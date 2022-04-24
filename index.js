@@ -9,8 +9,7 @@ form.addEventListener('submit', (event) => {
         startingQuality: formData.get('item-quality'),
         dateAdded: formData.get('date-added')
     }
-    // form.reset()
-
+    form.reset()
     const currentInventory = document.querySelector('#current-inventory')
     const newRow = createNewRow(newItem)
     currentInventory.append(newRow)

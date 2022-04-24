@@ -27,7 +27,7 @@ function calculateElapsedDays(date) {
 function createNewRow(newItem) {
     const newRow = document.createElement('tr')
     const sellIn = calculateSellIn(newItem)
-    const quality = qualityMinCheck(calculateQuality(newItem))
+    const quality = qualityCheck(calculateQuality(newItem), newItem)
     newRow.innerHTML = `
         <th>${newItem.name}</th>
         <th>${sellIn}</th>
@@ -50,24 +50,42 @@ function calculateQuality(newItem) {
         return 80
     } else if (newItem.name.includes('Conjured')) {
         if ((newItem.sellIn - (calculateElapsedDays(newItem.dateAdded)) < 0)) {
-            return (newItem.startingQuality - ((2 * (newItem.sellIn)) + (4 * (calculateElapsedDays(newItem.dateAdded) - newItem.sellIn))))
+            return (+newItem.startingQuality - ((2 * (newItem.sellIn)) + (4 * (calculateElapsedDays(newItem.dateAdded) - newItem.sellIn))))
         }
         else {
-            return newItem.startingQuality - (2 * (calculateElapsedDays(newItem.dateAdded)))
+            return +newItem.startingQuality - (2 * (calculateElapsedDays(newItem.dateAdded)))
+        }
+    } else if (newItem.name.includes('Aged Brie')) {
+        return (+newItem.startingQuality + ((calculateElapsedDays(newItem.dateAdded))))
+    } else if (newItem.name.includes('Backstage passes')) {
+        if (newItem.sellIn - (calculateElapsedDays(newItem.dateAdded)) > 10) {
+            return (+newItem.startingQuality + ((calculateElapsedDays(newItem.dateAdded))))
+        } else if ((newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))) < 11 && (newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))) > 5) {
+            return (+newItem.startingQuality + (newItem.sellIn - 11) + (2 * ((calculateElapsedDays(newItem.dateAdded)) - (newItem.sellIn - 11))))
+        } else if ((newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))) < 6 && (newItem.sellIn - (calculateElapsedDays(newItem.dateAdded))) > 0) {
+            return (+newItem.startingQuality + (newItem.sellIn - 11) + 10 + (3 * ((calculateElapsedDays(newItem.dateAdded)) - (newItem.sellIn - 6))))
+        } else if ((newItem.sellIn - (calculateElapsedDays(newItem.dateAdded)) <= 0)) {
+            return 0
         }
     } else {
         if ((newItem.sellIn - (calculateElapsedDays(newItem.dateAdded)) < 0)) {
-            return (newItem.startingQuality - ((+newItem.sellIn) + (2 * ((calculateElapsedDays(newItem.dateAdded)) - newItem.sellIn))))
+            return (+newItem.startingQuality - ((+newItem.sellIn) + (2 * ((calculateElapsedDays(newItem.dateAdded)) - newItem.sellIn))))
         }
         else {
-            return newItem.startingQuality - ((calculateElapsedDays(newItem.dateAdded)))
+            return +newItem.startingQuality - ((calculateElapsedDays(newItem.dateAdded)))
         }
     }
 }
 
-function qualityMinCheck(quality) {
+function qualityCheck(quality, newItem) {
     if (quality < 0) {
         return 0
+    } else if (quality > 50) {
+        if (newItem.name.includes('Sulfuras')) {
+            return 80
+        } else {
+            return 50
+        }
     } else {
         return quality
     }
